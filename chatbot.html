@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple AI Chatbot</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f1f1;
+        }
+
+        .chat-container {
+            width: 350px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 20px;
+        }
+
+        #chatBox {
+            height: 350px;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .user-message {
+            text-align: right;
+            color: blue;
+            margin: 10px;
+        }
+
+        .bot-message {
+            text-align: left;
+            color: green;
+            margin: 10px;
+        }
+
+        .input-box {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+
+        #userInput {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            outline: none;
+        }
+
+        button {
+            padding: 12px 18px;
+            border: none;
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="chat-container">
+
+    <div class="chat-header">
+        🤖 My Chatbot
+    </div>
+
+    <div id="chatBox">
+        <div class="bot-message">
+            Bot: Hi! 👋 I'm your chatbot. How can I help you?
+        </div>
+    </div>
+
+    <div class="input-box">
+
+        <input
+            type="text"
+            id="userInput"
+            placeholder="Type your question..."
+            onkeypress="pressEnter(event)"
+        >
+
+        <button onclick="sendMessage()">Send</button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function sendMessage() {
+
+    let input = document.getElementById("userInput");
+    let chatBox = document.getElementById("chatBox");
+
+    let question = input.value.toLowerCase().trim();
+
+    if (question === "") {
+        return;
+    }
+
+    // Show user's question
+    chatBox.innerHTML +=
+        "<div class='user-message'>You: " + question + "</div>";
+
+    let answer = getAnswer(question);
+
+    // Show chatbot's answer
+    chatBox.innerHTML +=
+        "<div class='bot-message'>Bot: " + answer + "</div>";
+
+    input.value = "";
+
+    // Automatically scroll down
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+
+function getAnswer(question) {
+
+    if (question.includes("hi") ||
+        question.includes("hello") ||
+        question.includes("hey")) {
+
+        return "Hi! 😊 Nice to meet you. How can I help you?";
+    }
+
+
+    else if (question.includes("your name") ||
+             question.includes("who are you")) {
+
+        return "I'm a simple AI chatbot created to answer your questions.";
+    }
+
+
+    else if (question.includes("help")) {
+
+        return "Of course! I can help you with basic information about our website.";
+    }
+
+
+    else if (question.includes("working hours") ||
+             question.includes("office hours") ||
+             question.includes("what time")) {
+
+        return "We are available from 9 AM to 6 PM.";
+    }
+
+
+    else if (question.includes("contact") ||
+             question.includes("phone") ||
+             question.includes("email")) {
+
+        return "You can contact us through email or phone. Our support team will be happy to help!";
+    }
+
+
+    else if (question.includes("price") ||
+             question.includes("cost")) {
+
+        return "You can check our products page to see the latest prices.";
+    }
+
+
+    else if (question.includes("location") ||
+             question.includes("where are you") ||
+             question.includes("located")) {
+
+        return "We are located in Trichy, Tamil Nadu.";
+    }
+
+
+    else if (question.includes("register") ||
+             question.includes("registration") ||
+             question.includes("sign up")) {
+
+        return "You can easily register through our website by clicking the Register button.";
+    }
+
+
+    else if (question.includes("thank") ||
+             question.includes("thanks")) {
+
+        return "You're very welcome! 😊 I'm happy to help.";
+    }
+
+
+    else if (question.includes("bye") ||
+             question.includes("goodbye")) {
+
+        return "Bye! 👋 Have a wonderful day!";
+    }
+
+
+    else {
+
+        return "Hmm... I'm not sure about that. Please try asking another question.";
+    }
+}
+
+
+function pressEnter(event) {
+
+    if (event.key === "Enter") {
+        sendMessage();
+    }
+
+}
+
+</script>
+
+</body>
+</html>
